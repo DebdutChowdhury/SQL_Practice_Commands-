@@ -50,7 +50,7 @@ select emp_salary from empwage group by emp_salary
 select deptno, sum(emp_salary) as 'Total salary' from empwage group by deptno
 select deptno, min(emp_salary) as 'Min salary' from empwage group by deptno
 select deptno, round(avg(emp_salary),2) as 'Avg salary' from empwage group by deptno /*round up with dacemal*/
-select deptno, sum(emp_salary) from empwage group by deptno having deptno=20
+select deptno, count(*) as Total_Emp,sum(emp_salary) as Emp_salary from empwage group by deptno having deptno=20
 
 select * from company
 /*drop table company*/
