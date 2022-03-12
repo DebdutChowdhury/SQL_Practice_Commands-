@@ -52,11 +52,37 @@ select deptno, min(emp_salary) as 'Min salary' from empwage group by deptno
 select deptno, round(avg(emp_salary),2) as 'Avg salary' from empwage group by deptno /*round up with dacemal*/
 select deptno, count(*) as Total_Emp,sum(emp_salary) as Emp_salary from empwage group by deptno having deptno=20
 
+select * from empwage
 select * from company
 /*drop table company*/
+/*drop table empwage*/
 
 insert into company(comp_id, comp_name, emp_id) values (1, 'BridgeLabz',1)
 insert into company(comp_id, comp_name, emp_id) values (2, 'TCS',2)
 insert into company(comp_id, comp_name, emp_id) values (3, 'KPMG',3)
 insert into company(comp_id, comp_name, emp_id) values (4, 'IBM',4)
 
+------indexing-------
+execute sp_helpindex empwage
+execute sp_helpindex company
+
+create table employeeTable(
+	id int primary key,
+	name varchar(50),
+	salary int,
+	gender varchar(40)
+)
+insert into employeeTable(id, name, salary, gender)values(1,'Alex',25000,'male')
+insert into employeeTable(id, name, salary, gender)values(3,'Riya',20500,'female')
+insert into employeeTable(id, name, salary, gender)values(2,'Megha',19000,'female')
+insert into employeeTable(id, name, salary, gender)values(4,'Sangita',26000,'female')
+insert into employeeTable(id, name, salary, gender)values(5,'Deb',30500,'male')
+
+select * from employeeTable
+
+create index IX_employee_salary on employeeTable(salary asc)
+drop index if exists employeeTable.IX_employee_salary
+exec sp_helpindex IX_employee_salary
+
+create nonclustered index empdetails on employeeTable(name asc, gender)
+exec sp_helpindex empdetails

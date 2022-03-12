@@ -44,6 +44,12 @@ create table Course (
 	course_fees Decimal(6,2)
 )
 
+create table companyPlaced(
+	course_id int,
+	company_name varchar(40),
+	company_stack varchar(40)
+)
+
 select * from Student
 select * from Course
 

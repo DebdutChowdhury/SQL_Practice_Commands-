@@ -38,3 +38,52 @@ drop table Orders
 
 delete from Coustomers where cust_id=3
 update Coustomers set cust_id = 25 where cust_id=4
+
+
+
+
+
+/* update employee record */
+Create procedure spUpdateEmployeePayroll
+(
+@name varchar(20),
+@salary money
+)
+As 
+Begin try
+update employee set salary=@salary where name=@name
+end try
+Begin catch
+SELECT
+    ERROR_NUMBER() AS ErrorNumber,
+    ERROR_STATE() AS ErrorState,
+    ERROR_PROCEDURE() AS ErrorProcedure,
+    ERROR_LINE() AS ErrorLine,
+    ERROR_MESSAGE() AS ErrorMessage;
+END CATCH  
+
+exec spUpdateEmployeePayroll
+'Debdutt',85000
+
+
+
+Alter procedure spEmpDetailsForDataRange
+(
+@startdate date
+)
+As
+Begin try
+/* select * from employee where startdate between cast('{Date}' as date) and 
+cast(getdate() as date) */
+select * from employee where startdate between CAST(@startdate AS date) AND SYSDATETIME()
+end try  
+Begin catch
+SELECT
+    ERROR_NUMBER() AS ErrorNumber,
+    ERROR_STATE() AS ErrorState,
+    ERROR_PROCEDURE() AS ErrorProcedure,
+    ERROR_LINE() AS ErrorLine,
+    ERROR_MESSAGE() AS ErrorMessage;
+END CATCH 
+
+exec spEmpDeta
