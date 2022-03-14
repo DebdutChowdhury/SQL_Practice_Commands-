@@ -78,5 +78,5 @@ select * from Student, Course where Student.course_id > Course.course_id
 -----Self Join-----
 select * from empwage
 /* We have only one name 'Deba' here we want like Deba who get same salary in the emp table */
-select e1.emp_id, e1.emp_name, e1.emp_address, e1.emp_salary from empwage e1, empwage e2 
-where e1.emp_salary = e2.emp_salary and e2.emp_name = 'Deba'
+select e1.emp_id, e1.emp_name, e1.emp_salary from empwage e1, empwage e2 
+where e1.emp_salary = e2.emp_salary and e2.emp_name = 'Ram'

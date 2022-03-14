@@ -27,7 +27,8 @@ update cv1 set emp_name = 'Godfather' where emp_name = 'Ashwini'
 
 select * from cv1
 
-
+	--------------------------Functions---------------------------
+/*creating a funtion for add two number*/
 create function addnum(@num1 int, @num2 int)
 returns int
 as
@@ -59,6 +60,7 @@ select * from Orders
 create table student_marks(rollno int, science int, math int, eng int)
 select * from student_marks
 
+/*Creating a function for Get total marks from each student*/
 create function getTotalMarks(@rollno int)
 returns int
 as 
@@ -68,4 +70,26 @@ select @result = (science + math + eng) from student_marks where rollno = @rolln
 return @result
 end
 
-select rollno,science,math,eng,dbo.getTotalMarks(rollno) as 'Total_marks' from student_marks
+select rollno,science,math,eng,dbo.getTotalMarks(rollno) as 'Total_marks' 
+from student_marks
+
+create function create_contact()
+	returns @contacts table(
+		fname varchar(40),
+		lname varchar(40),
+		email varchar(40),
+		phnum int,
+		contact_type varchar(40)
+	)
+	as
+	begin
+	insert into @contacts
+	select 
+		fname, lname, email, phnum, contact_type
+	from @contacts
+	return 
+	end
+
+select * from create_contact()
+
+------------------Cursor-----------------------
